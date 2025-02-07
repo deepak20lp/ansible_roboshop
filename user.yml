@@ -6,13 +6,14 @@
     ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
   - name: install nodejs
-    ansible.builtin.npm:
+    ansible.builtin.yum:
       name: nodejs
       state: installed
 
   - name: check user
     ansible.builtin.command: id roboshop
     register: out 
+    ignore_errors: true
 
   - name: create user
     ansible.builtin.user:
@@ -29,3 +30,47 @@
       path: /app
       state: directory
     when: directoryy.stat.exists == false
+
+  - name: curl http
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/user.zip
+      dest: /tmp
+
+  - name: unarchive
+    ansible.builtin.unarchive:
+      src: /tmp/user.zip
+      dest: /app
+      remote_src: yes
+
+  - name: npm
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+
+  - name: copy user service
+    ansible.builtin.copy:
+      src: user.service
+      dest: /etc/systemd/system/user.service
+
+  - name: deamon reload
+    ansible.builtin.systemd:
+      daemon_reload: true
+
+  - name: copy mongo repo to yum.repos.d
+    ansible.builtin.copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: Install MongoDB
+    ansible.builtin.yum:
+      name: mongodb-org-shell
+      state: installed
+
+  - name: load user data
+    ansible.builtin.command: mongo --host mongodb.joindevops.online < /app/schema/user.js
+
+  - name: restart user
+    ansible.builtin.service:
+      name: user
+      state: restarted
+      enabled: true
