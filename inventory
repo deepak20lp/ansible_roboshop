@@ -1,29 +1,29 @@
 [mongodb]
-mongodb.joindevops.online
+mongodb.deepakreddy.online
 
 [catalogue]
-catalogue.joindevops.online
+catalogue.deepakreddy.online
 
 [web]
-web.joindevops.online
+web.deepakreddy.online
 
 [redis]
-redis.joindevops.online
+redis.deepakreddy.online
 
 [user]
-user.joindevops.online
+user.deepakreddy.online
 
 [cart]
-cart.joindevops.online
+cart.deepakreddy.online
 
 [mysql]
-mysql.joindevops.online
+mysql.deepakreddy.online
 
 [shipping]
-shipping.joindevops.online
+shipping.deepakreddy.online
 
 [rabbitmq]
-rabbitmq.joindevops.online
+rabbitmq.deepakreddy.online
 
 [payment]
-payment.joindevops.online
+payment.deepakreddy.online
