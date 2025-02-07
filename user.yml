@@ -1,0 +1,31 @@
+- name: user serv
+  hosts: user
+  become: yes
+  tasks:
+  - name: dowunload form aws configure
+    ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+  - name: install nodejs
+    ansible.builtin.npm:
+      name: nodejs
+      state: installed
+
+  - name: check user
+    ansible.builtin.command: id roboshop
+    register: out 
+
+  - name: create user
+    ansible.builtin.user:
+      name: roboshop
+    when: out.rc !=0
+
+  - name: check dir
+    ansible.builtin.stat:
+      path: /app
+    register: directory
+
+  - name: create
+    ansible.builtin.file:
+      path: /app
+      state: directory
+    when: directoryy.stat.exists == false
