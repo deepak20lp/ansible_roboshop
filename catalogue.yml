@@ -77,7 +77,7 @@
       state: installed
 
   - name: load data
-    ansible.builtin.command: mongo --host mongodb.deepakreddy.online </app/schema/catalogue.js
+    ansible.builtin.shell: mongo --host mongodb.deepakreddy.online </app/schema/catalogue.js
 
 
   
