@@ -2,9 +2,9 @@
 
 NAMES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web")
 INSTANCE_TYPE=""
-IMAGE_ID=ami-03265a0778a880afb
-SECURITY_GROUP_ID=sg-0189d4870cc65fd55
-DOMAIN_NAME=joindevops.online
+IMAGE_ID=ami-0b4f379183e5706b9
+SECURITY_GROUP_ID=sg-0857cf95e6d82697c
+DOMAIN_NAME=deepakreddy.online
 
 # if mysql or mongodb instance_type should be t3.medium , for all others it is t2.micro
 
