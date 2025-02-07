@@ -8,7 +8,7 @@ resource "aws_instance" "main" {
         instance_type = "t2.micro"
         #security_groups = [ sg-0857cf95e6d82697c ]
         vpc_security_group_ids = [ "sg-0857cf95e6d82697c" ]
-        #iam_instance_profile = "roboshop"
+        iam_instance_profile = "roboshop"
         #iam_instance_profile = null
 
 
