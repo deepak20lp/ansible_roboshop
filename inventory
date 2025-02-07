@@ -1,28 +1,29 @@
-172.31.95.227
+[mongodb]
+mongodb.joindevops.online
 
 [catalogue]
-catalogue.deepareddy.online
+catalogue.joindevops.online
 
 [web]
-web.deepareddy.online
+web.joindevops.online
 
 [redis]
-redis.deepareddy.online
+redis.joindevops.online
 
 [user]
-user.deepareddy.online
+user.joindevops.online
 
 [cart]
-cart.deepareddy.online
+cart.joindevops.online
 
 [mysql]
-mysql.deepareddy.online
+mysql.joindevops.online
 
 [shipping]
-shipping.deepareddy.online
+shipping.joindevops.online
 
 [rabbitmq]
-rabbitmq.deepareddy.online
+rabbitmq.joindevops.online
 
 [payment]
-payment.deepareddy.online
+payment.joindevops.online
