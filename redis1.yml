@@ -3,16 +3,20 @@
   become: yes
   tasks:
 
-  - name: Install Remi repository (Alternative)
+  - name: Install EPEL repository (Required for Remi)
     ansible.builtin.yum:
-      name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      name: epel-release
+      state: present
+
+  - name: Install Remi repository (CentOS Stream 8)
+    ansible.builtin.yum:
+      name: https://rpms.remirepo.net/enterprise/remi-release-stream-8.rpm
       state: present
       disable_gpg_check: true
 
   - name: Enable Redis module (Remi 6.2)
-    ansible.builtin.dnf:
-      name: redis:remi-6.2
-      state: enabled
+    ansible.builtin.command: yum module enable redis:remi-6.2 -y
+    changed_when: false  # Prevents Ansible from always showing changes
 
   - name: Install Redis
     ansible.builtin.yum:
@@ -21,11 +25,11 @@
 
   - name: Update Redis configuration (Allow external connections)
     ansible.builtin.replace:
-      path: '/etc/redis/redis.conf'  # Corrected path
+      path: '/etc/redis/redis.conf'
       regexp: '^bind 127.0.0.1'
       replace: 'bind 0.0.0.0'
 
-  - name: Restart Redis to apply changes
+  - name: Restart and enable Redis service
     ansible.builtin.service:
       name: redis
       state: restarted
