@@ -36,7 +36,7 @@
     when: directoryy.stat.exists == false
 
   - name: download code (from http)
-    ansible.builtin.url:
+    ansible.builtin.get_url:
       url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
       dest: /tmp
 
