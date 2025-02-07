@@ -52,7 +52,7 @@
       chdir: /app
 
   - name: cpoy the catalogue service
-    ansibile.builtin.copy:
+    ansible.builtin.copy:
       src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
 
