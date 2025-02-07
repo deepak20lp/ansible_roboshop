@@ -67,7 +67,7 @@
       state: installed
 
   - name: load user data
-    ansible.builtin.command: mongo --host mongodb.joindevops.online < /app/schema/user.js
+    ansible.builtin.shell: mongo --host mongodb.joindevops.online < /app/schema/user.js
 
   - name: restart user
     ansible.builtin.service:
