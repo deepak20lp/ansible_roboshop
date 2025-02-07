@@ -1,0 +1,32 @@
+- name: Install and Configure Redis
+  hosts: redis
+  become: yes
+  tasks:
+
+  - name: Install Remi repository (Alternative)
+    ansible.builtin.yum:
+      name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      state: present
+      disable_gpg_check: true
+
+  - name: Enable Redis module (Remi 6.2)
+    ansible.builtin.dnf:
+      name: redis:remi-6.2
+      state: enabled
+
+  - name: Install Redis
+    ansible.builtin.yum:
+      name: redis
+      state: installed
+
+  - name: Update Redis configuration (Allow external connections)
+    ansible.builtin.replace:
+      path: '/etc/redis/redis.conf'  # Corrected path
+      regexp: '^bind 127.0.0.1'
+      replace: 'bind 0.0.0.0'
+
+  - name: Restart Redis to apply changes
+    ansible.builtin.service:
+      name: redis
+      state: restarted
+      enabled: yes
