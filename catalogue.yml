@@ -27,7 +27,7 @@
 
   - name: verify
     ansible.builtin.debug:
-      msg: {{directoryy}}
+      msg: "{{directoryy}}"
 
-      
+
 
