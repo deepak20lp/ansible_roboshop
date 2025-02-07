@@ -1,0 +1,33 @@
+- name: installin catalogue
+  hosts: catalogue
+  become: yes
+  tasks:
+  - name: setup npm source
+    ansible.builtin.shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
+
+  - name: install nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: installed
+
+  - name: check user roboshop exists docker network create --driver overlay your-overlay-network
+    ansible.builtin.command: "id roboshop"
+    register: out
+    ignore_errors: true
+
+  - name: create user 
+    ansible.builtin.user:
+      name: roboshop
+    when: out.rc != 0
+
+  - name: check if direc is set or not 
+    ansible.builtin.stat:
+      path: /app
+    register: directoryy
+
+  - name: verify
+    ansible.builtin.debug:
+      msg: {{directoryy}}
+
+      
+
