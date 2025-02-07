@@ -1,0 +1,28 @@
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Ignore AWS credentials
+.aws/
+*.pem
+*.key
+
+# Ignore logs and temp files
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Ignore Python virtual environment
+venv/
+__pycache__/
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore Terraform variables (if sensitive)
+terraform.tfvars
+*.auto.tfvars
