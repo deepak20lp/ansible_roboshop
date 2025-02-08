@@ -70,7 +70,7 @@
       state: installed
 
   - name: load data
-    ansible.builtin.command: mysql -h mysql.deepakreddy.online -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+    ansible.builtin.shell: mysql -h mysql.deepakreddy.online -uroot -pRoboShop@1 < /app/schema/shipping.sql 
   
   - name: restart
     ansible.builtin.service:
