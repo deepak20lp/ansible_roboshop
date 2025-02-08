@@ -70,11 +70,11 @@
       state: installed
 
   - name: load data
-    ansible.builtin.shell: mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/schema.sql
+    ansible.builtin.shell: mysql -h <mysql.deepakreddy.online -uroot -pRoboShop@1 < /app/db/schema.sql
   - name: load data1
-    ansible.builtin.shell: mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/app-user.sql 
+    ansible.builtin.shell: mysql -h <mysql.deepakreddy.online -uroot -pRoboShop@1 < /app/db/app-user.sql 
   - name: load data2
-    ansible.builtin.shell: mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/master-data.sql
+    ansible.builtin.shell: mysql -h <mysql.deepakreddy.online -uroot -pRoboShop@1 < /app/db/master-data.sql
   
   - name: restart
     ansible.builtin.service:
