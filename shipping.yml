@@ -29,7 +29,7 @@
     when: directory.stat.exists == false
 
   - name: get url
-    ansible.builtin.ger_url:
+    ansible.builtin.get_url:
       url: https://roboshop-builds.s3.amazonaws.com/shipping.zip
       dest: /tmp
 
