@@ -29,7 +29,7 @@
     ansible.builtin.file:
       path: /app
       state: directory
-    when: directiry.stat.exists == false
+    when: directory.stat.exists == false
 
   - name: downlaod appcode
     ansible.builtin.get_url:
