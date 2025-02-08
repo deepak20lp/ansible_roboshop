@@ -1,0 +1,66 @@
+- name: cinfigure cart
+  hosts: cart
+  become: yes
+  tasks:
+  - name: get the script
+    ansible.builtin.command: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+  - name: install nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: installed
+
+  - name: check roboshop user
+    ansible.builtin.command: id roboshop
+    register: out
+    ignore_errors: true
+
+  - name: create roboshop
+    ansible.builtin.user:
+      name: roboshop
+    when: out.rc != 0
+
+  - name: check for app directory
+    ansible.builtin.stat:
+      path: /app
+    register: directory
+
+  - name: create app directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+    when: directiry.stat.exists == false
+
+  - name: downlaod appcode
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/cart.zip
+      dest: /tmp
+
+  - name: extract app code
+    ansible.builtin.unarchive:
+      src: /tmp/cart.zip
+      dest: /app
+      remote_src: yes
+
+  - name: npm install
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+
+  - name: copy cart.service
+    ansible.builtin.copy:
+      src: cart.service
+      dest: /etc/systemd/system/cart.service
+
+  - name: daemon reload
+    ansible.builtin.systemd:
+      daemon_reload: true
+
+  - name: enable and start the service
+    ansible.builtin.service:
+      name: cart
+      state: started
+      enabled: true
+  
+
+
